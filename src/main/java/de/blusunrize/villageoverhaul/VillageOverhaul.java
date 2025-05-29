@@ -1,6 +1,7 @@
 package de.blusunrize.villageoverhaul;
 
 import com.mojang.logging.LogUtils;
+import de.blusunrize.villageoverhaul.features.RemoveRaidTotems;
 import de.blusunrize.villageoverhaul.features.ResettingCartographerMaps;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -24,6 +25,7 @@ public class VillageOverhaul
         modEventBus.addListener(this::commonSetup);
 
         // Register features
+        NeoForge.EVENT_BUS.register(new RemoveRaidTotems());
         NeoForge.EVENT_BUS.register(new ResettingCartographerMaps());
     }
 
