@@ -1,10 +1,12 @@
 package de.blusunrize.villageoverhaul;
 
 import com.mojang.logging.LogUtils;
+import de.blusunrize.villageoverhaul.features.ResettingCartographerMaps;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -20,6 +22,9 @@ public class VillageOverhaul
     {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
+
+        // Register features
+        NeoForge.EVENT_BUS.register(new ResettingCartographerMaps());
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
