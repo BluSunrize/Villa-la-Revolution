@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "de.blusunrize.villageoverhaul.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "GolemSensorMixin",
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
