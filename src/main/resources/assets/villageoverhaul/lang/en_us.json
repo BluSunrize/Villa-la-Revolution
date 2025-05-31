@@ -1,3 +1,5 @@
 {
-  "container.fletching": "Fletching"
+  "container.fletching": "Fletching",
+  "tag.item.villageoverhaul.arrowhead": "Arrowhead Material",
+  "tag.item.villageoverhaul.fletching": "Fletching Material"
 }

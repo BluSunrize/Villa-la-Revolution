@@ -3,9 +3,12 @@ package de.blusunrize.villageoverhaul.data;
 import com.google.common.collect.ImmutableList;
 import de.blusunrize.villageoverhaul.VillageOverhaul;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -14,10 +17,13 @@ import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.world.StructureModifier;
 import net.neoforged.neoforge.common.world.StructureModifiers.AddSpawnsStructureModifier;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys;
+
+import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = VillageOverhaul.MODID)
 public class DatagenHolder
@@ -30,6 +36,11 @@ public class DatagenHolder
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event)
 	{
+		DataGenerator generator = event.getGenerator();
+		PackOutput output = generator.getPackOutput();
+		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+		CompletableFuture<Provider> lookupProvider = event.getLookupProvider();
+
 		if(event.includeServer())
 		{
 			event.createDatapackRegistryObjects(new RegistrySetBuilder().add(
@@ -45,6 +56,7 @@ public class DatagenHolder
 										new SpawnerData(EntityType.WITCH, 1, 1, 1)
 								)));
 					}));
+			event.addProvider(new TagProviderItems(output, lookupProvider, existingFileHelper));
 		}
 	}
 }
