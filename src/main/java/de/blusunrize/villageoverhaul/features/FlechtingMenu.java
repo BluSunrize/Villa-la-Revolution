@@ -5,7 +5,10 @@ import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.ResultContainer;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -47,7 +50,7 @@ public class FlechtingMenu extends AbstractContainerMenu
 		{
 			public boolean mayPlace(ItemStack stack)
 			{
-				return stack.is(Items.FLINT);
+				return stack.is(Registrar.TAG_ARROWHEAD);
 			}
 		});
 		this.addSlot(new Slot(this.container, 1, 44, 33)
@@ -61,7 +64,7 @@ public class FlechtingMenu extends AbstractContainerMenu
 		{
 			public boolean mayPlace(ItemStack stack)
 			{
-				return stack.is(Tags.Items.FEATHERS);
+				return stack.is(Registrar.TAG_FLETCHING);
 			}
 		});
 
@@ -105,20 +108,16 @@ public class FlechtingMenu extends AbstractContainerMenu
 		ItemStack stick = this.container.getItem(1);
 		ItemStack fletching = this.container.getItem(2);
 		ItemStack output = this.resultContainer.getItem(3);
-		if(output.isEmpty()||!tip.isEmpty()&&!fletching.isEmpty())
-		{
-			if(!tip.isEmpty()&&!stick.isEmpty()&&!fletching.isEmpty())
-				this.setupResultSlot(tip, stick, fletching, output);
-		}
+
+		if(!tip.isEmpty()&&!stick.isEmpty()&&!fletching.isEmpty())
+			this.setupResultSlot(tip, stick, fletching, output);
 		else
 			this.resultContainer.removeItemNoUpdate(2);
 	}
 
 	private void setupResultSlot(ItemStack tip, ItemStack stick, ItemStack fletching, ItemStack currentOutput)
 	{
-		ItemStack tempOutput = ItemStack.EMPTY;
-		if(tip.is(Items.FLINT))
-			tempOutput = new ItemStack(Items.ARROW, 8);
+		ItemStack tempOutput = new ItemStack(Items.ARROW, 6);
 		if(!ItemStack.matches(tempOutput, currentOutput))
 		{
 			this.resultContainer.setItem(2, tempOutput);
@@ -151,22 +150,14 @@ public class FlechtingMenu extends AbstractContainerMenu
 			}
 			else if(index > 3)
 			{
-				if(slotItem.is(Items.FLINT))
+				for(int i = 0; i < 3; i++)
 				{
-					if(!this.moveItemStackTo(slotItem, 0, 1, false))
+					Slot ingredientSlot = this.getSlot(i);
+					if(ingredientSlot.mayPlace(slotItem)&&!this.moveItemStackTo(slotItem, ingredientSlot.index, ingredientSlot.index+1, false))
 						return ItemStack.EMPTY;
 				}
-				else if(slotItem.is(Tags.Items.RODS_WOODEN))
-				{
-					if(!this.moveItemStackTo(slotItem, 1, 2, false))
-						return ItemStack.EMPTY;
-				}
-				else if(slotItem.is(Tags.Items.FEATHERS))
-				{
-					if(!this.moveItemStackTo(slotItem, 2, 3, false))
-						return ItemStack.EMPTY;
-				}
-				else if(index < 30)
+
+				if(index < 30)
 				{
 					if(!this.moveItemStackTo(slotItem, 30, 39, false))
 						return ItemStack.EMPTY;
