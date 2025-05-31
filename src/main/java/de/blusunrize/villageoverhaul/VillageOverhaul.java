@@ -1,12 +1,16 @@
 package de.blusunrize.villageoverhaul;
 
 import com.mojang.logging.LogUtils;
+import de.blusunrize.villageoverhaul.features.FletchingScreen;
 import de.blusunrize.villageoverhaul.features.RemoveRaidTotems;
 import de.blusunrize.villageoverhaul.features.ResettingCartographerMaps;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
@@ -14,22 +18,30 @@ import org.slf4j.Logger;
 @Mod(VillageOverhaul.MODID)
 public class VillageOverhaul
 {
-    public static final String MODID = "villageoverhaul";
-    public static final Logger LOGGER = LogUtils.getLogger();
+	public static final String MODID = "villageoverhaul";
+	public static final Logger LOGGER = LogUtils.getLogger();
 
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
-    public VillageOverhaul(IEventBus modEventBus, ModContainer modContainer)
-    {
-        // Register the commonSetup method for modloading
-        modEventBus.addListener(this::commonSetup);
+	public VillageOverhaul(IEventBus modEventBus, ModContainer modContainer)
+	{
+		// Register mod bus listeners
+		modEventBus.addListener(this::commonSetup);
+		modEventBus.addListener(this::registerScreens);
 
-        // Register features
-        NeoForge.EVENT_BUS.register(new RemoveRaidTotems());
-        NeoForge.EVENT_BUS.register(new ResettingCartographerMaps());
-    }
+		// Set up deferred registries
+		Registrar.MENU_REGISTER.register(modEventBus);
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
-    }
+		// Register features
+		NeoForge.EVENT_BUS.register(new RemoveRaidTotems());
+		NeoForge.EVENT_BUS.register(new ResettingCartographerMaps());
+	}
+
+	private void commonSetup(final FMLCommonSetupEvent event)
+	{
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	private void registerScreens(RegisterMenuScreensEvent event)
+	{
+		event.register(Registrar.MENU_FLETCHING.get(), FletchingScreen::new);
+	}
 }

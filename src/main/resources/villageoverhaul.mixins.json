@@ -3,6 +3,7 @@
   "package": "de.blusunrize.villageoverhaul.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "FletchingTableBlockMixin",
     "GolemSensorMixin",
     "VillagerMixin"
   ],
