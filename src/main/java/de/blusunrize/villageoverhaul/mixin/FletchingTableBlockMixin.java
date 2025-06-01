@@ -1,7 +1,6 @@
 package de.blusunrize.villageoverhaul.mixin;
 
-import de.blusunrize.villageoverhaul.Config;
-import de.blusunrize.villageoverhaul.features.FlechtingMenu;
+import de.blusunrize.villageoverhaul.gui.FlechtingMenu;
 import de.blusunrize.villageoverhaul.features.FletchingFeature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

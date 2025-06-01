@@ -1,4 +1,4 @@
-package de.blusunrize.villageoverhaul.features;
+package de.blusunrize.villageoverhaul.gui;
 
 import de.blusunrize.villageoverhaul.VillageOverhaul;
 import net.minecraft.client.gui.GuiGraphics;

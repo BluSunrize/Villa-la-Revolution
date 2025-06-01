@@ -1,5 +1,6 @@
-package de.blusunrize.villageoverhaul.features;
+package de.blusunrize.villageoverhaul.gui;
 
+import de.blusunrize.villageoverhaul.features.FletchingFeature;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
