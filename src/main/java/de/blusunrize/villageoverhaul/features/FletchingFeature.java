@@ -8,6 +8,7 @@ import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -24,7 +25,8 @@ public class FletchingFeature implements IFeature
 	@Override
 	public void init(IEventBus modEventBus)
 	{
-		modEventBus.addListener(this::registerScreens);
+		if(FMLEnvironment.dist.isClient())
+			modEventBus.addListener(this::registerScreens);
 	}
 
 	@Override
