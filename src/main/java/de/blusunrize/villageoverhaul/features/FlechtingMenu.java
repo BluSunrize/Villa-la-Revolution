@@ -15,6 +15,11 @@ import net.neoforged.neoforge.common.Tags;
 
 public class FlechtingMenu extends AbstractContainerMenu
 {
+	private final static int INPUT_SLOT_COUNT = 4;
+	private final static int TABLE_SLOT_COUNT = INPUT_SLOT_COUNT+1;
+	private final static int TOTAL_SLOT_COUNT = TABLE_SLOT_COUNT+36;
+	private final static int TOTAL_SLOT_COUNT_NO_HOTBAR = TABLE_SLOT_COUNT+27;
+
 	private final ContainerLevelAccess access;
 	public final Container container;
 	private final ResultContainer resultContainer;
@@ -28,7 +33,7 @@ public class FlechtingMenu extends AbstractContainerMenu
 	{
 		super(FletchingFeature.MENU_FLETCHING.get(), containerId);
 		this.access = access;
-		this.container = new SimpleContainer(3)
+		this.container = new SimpleContainer(INPUT_SLOT_COUNT)
 		{
 			public void setChanged()
 			{
@@ -66,8 +71,15 @@ public class FlechtingMenu extends AbstractContainerMenu
 				return stack.is(FletchingFeature.TAG_FLETCHING);
 			}
 		});
+		this.addSlot(new Slot(this.container, 3, 80, 33)
+		{
+			public boolean mayPlace(ItemStack stack)
+			{
+				return FletchingFeature.OUTPUT_CONVERSIONS.keySet().stream().anyMatch(i -> i.test(stack));
+			}
+		});
 
-		this.addSlot(new Slot(this.resultContainer, 3, 116, 33)
+		this.addSlot(new Slot(this.resultContainer, 0, 120, 33)
 		{
 			public boolean mayPlace(ItemStack stack)
 			{
@@ -76,7 +88,7 @@ public class FlechtingMenu extends AbstractContainerMenu
 
 			public void onTake(Player player, ItemStack stack)
 			{
-				for(int i = 0; i < 3; i++)
+				for(int i = 0; i < INPUT_SLOT_COUNT; i++)
 					FlechtingMenu.this.slots.get(i).remove(1);
 				stack.getItem().onCraftedBy(stack, player.level(), player);
 				access.execute((p_39219_, p_39220_) -> {
@@ -106,20 +118,32 @@ public class FlechtingMenu extends AbstractContainerMenu
 		ItemStack tip = this.container.getItem(0);
 		ItemStack stick = this.container.getItem(1);
 		ItemStack fletching = this.container.getItem(2);
-		ItemStack output = this.resultContainer.getItem(3);
+		ItemStack additional = this.container.getItem(3);
+		ItemStack currentOutput = this.resultContainer.getItem(0);
 
 		if(!tip.isEmpty()&&!stick.isEmpty()&&!fletching.isEmpty())
-			this.setupResultSlot(tip, stick, fletching, output);
+		{
+			ItemStack tempOutput = new ItemStack(Items.ARROW, FletchingFeature.ARROW_OUTPUT_COUNT);
+			if(additional.isEmpty())
+				setupResultSlot(tempOutput, currentOutput);
+			else
+				FletchingFeature.OUTPUT_CONVERSIONS.entrySet().stream()
+						.filter(pair -> pair.getKey().test(additional))
+						.findFirst()
+						.ifPresentOrElse(
+								pair -> setupResultSlot(pair.getValue().convert(additional), currentOutput),
+								() -> setupResultSlot(tempOutput, currentOutput)
+						);
+		}
 		else
-			this.resultContainer.removeItemNoUpdate(2);
+			this.resultContainer.removeItemNoUpdate(0);
 	}
 
-	private void setupResultSlot(ItemStack tip, ItemStack stick, ItemStack fletching, ItemStack currentOutput)
+	private void setupResultSlot(ItemStack tempOutput, ItemStack currentOutput)
 	{
-		ItemStack tempOutput = new ItemStack(Items.ARROW, 6);
 		if(!ItemStack.matches(tempOutput, currentOutput))
 		{
-			this.resultContainer.setItem(2, tempOutput);
+			this.resultContainer.setItem(0, tempOutput);
 			this.broadcastChanges();
 		}
 	}
@@ -135,36 +159,35 @@ public class FlechtingMenu extends AbstractContainerMenu
 	{
 		ItemStack output = ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);
-		if(slot!=null&&slot.hasItem())
+		if(slot.hasItem())
 		{
 			ItemStack slotItem = slot.getItem();
 			output = slotItem.copy();
-			if(index==3)
+			if(index==INPUT_SLOT_COUNT) // Output slot
 			{
 				slotItem.getItem().onCraftedBy(slotItem, player.level(), player);
-				if(!this.moveItemStackTo(slotItem, 4, 40, true))
+				if(!this.moveItemStackTo(slotItem, TABLE_SLOT_COUNT, TOTAL_SLOT_COUNT, true))
 					return ItemStack.EMPTY;
 
 				slot.onQuickCraft(slotItem, output);
 			}
-			else if(index > 3)
+			else if(index > INPUT_SLOT_COUNT)
 			{
-				for(int i = 0; i < 3; i++)
+				for(int i = 0; i < INPUT_SLOT_COUNT; i++)
 				{
 					Slot ingredientSlot = this.getSlot(i);
 					if(ingredientSlot.mayPlace(slotItem)&&!this.moveItemStackTo(slotItem, ingredientSlot.index, ingredientSlot.index+1, false))
 						return ItemStack.EMPTY;
 				}
-
-				if(index < 30)
+				if(index < TOTAL_SLOT_COUNT_NO_HOTBAR)
 				{
-					if(!this.moveItemStackTo(slotItem, 30, 39, false))
+					if(!this.moveItemStackTo(slotItem, TOTAL_SLOT_COUNT_NO_HOTBAR, TOTAL_SLOT_COUNT, false))
 						return ItemStack.EMPTY;
 				}
-				else if(index < 39&&!this.moveItemStackTo(slotItem, 3, 30, false))
+				else if(index < TOTAL_SLOT_COUNT&&!this.moveItemStackTo(slotItem, TABLE_SLOT_COUNT, TOTAL_SLOT_COUNT_NO_HOTBAR, false))
 					return ItemStack.EMPTY;
 			}
-			else if(!this.moveItemStackTo(slotItem, 4, 40, false))
+			else if(!this.moveItemStackTo(slotItem, TABLE_SLOT_COUNT, TOTAL_SLOT_COUNT, false))
 				return ItemStack.EMPTY;
 
 			if(slotItem.isEmpty())
@@ -185,7 +208,7 @@ public class FlechtingMenu extends AbstractContainerMenu
 	public void removed(Player player)
 	{
 		super.removed(player);
-		this.resultContainer.removeItemNoUpdate(2);
+		this.resultContainer.removeItemNoUpdate(0);
 		this.access.execute((p_39152_, p_39153_) -> {
 			this.clearContainer(player, this.container);
 		});
