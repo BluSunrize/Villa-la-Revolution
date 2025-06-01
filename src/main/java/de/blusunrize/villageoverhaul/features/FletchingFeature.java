@@ -20,9 +20,17 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.Map;
+import java.util.function.IntSupplier;
 
+/**
+ * Make the fletching table have a GUI to enable cheaper crafting of arrows
+ */
 public class FletchingFeature implements IFeature
 {
+	// Config Values
+	public static boolean ENABLED = true;
+	public static IntSupplier ARROW_OUTPUT_COUNT;
+
 	// Menus
 	public static final DeferredHolder<MenuType<?>, MenuType<FlechtingMenu>> MENU_FLETCHING = Registrar.MENU_REGISTER.register(
 			"fletching_table", () -> new MenuType<>(FlechtingMenu::new, FeatureFlags.DEFAULT_FLAGS)
@@ -31,17 +39,15 @@ public class FletchingFeature implements IFeature
 	public static final TagKey<Item> TAG_FLETCHING = Registrar.modTag("fletching");
 	public static final TagKey<Item> TAG_ARROWHEAD = Registrar.modTag("arrowhead");
 
-	public static final int ARROW_OUTPUT_COUNT = 6;
-
 	// Additional ingredients for special arrows
 	public static final Map<Ingredient, ArrowConversion> OUTPUT_CONVERSIONS = ImmutableMap.of(
-			Ingredient.of(Tags.Items.DUSTS_GLOWSTONE), additionalIngredient -> new ItemStack(Items.SPECTRAL_ARROW, ARROW_OUTPUT_COUNT),
+			Ingredient.of(Tags.Items.DUSTS_GLOWSTONE), additionalIngredient -> new ItemStack(Items.SPECTRAL_ARROW, ARROW_OUTPUT_COUNT.getAsInt()),
 			Ingredient.of(Items.SPLASH_POTION), additionalIngredient -> {
 				PotionContents contents = additionalIngredient.get(DataComponents.POTION_CONTENTS);
 				if(contents!=null&&contents.potion().isPresent())
 				{
 					ItemStack tippedArrow = PotionContents.createItemStack(Items.TIPPED_ARROW, contents.potion().get());
-					tippedArrow.setCount(ARROW_OUTPUT_COUNT);
+					tippedArrow.setCount(ARROW_OUTPUT_COUNT.getAsInt());
 					return tippedArrow;
 				}
 				return ItemStack.EMPTY;
@@ -53,12 +59,6 @@ public class FletchingFeature implements IFeature
 	{
 		if(FMLEnvironment.dist.isClient())
 			modEventBus.addListener(this::registerScreens);
-	}
-
-	@Override
-	public boolean hasEventHandling()
-	{
-		return false;
 	}
 
 	@OnlyIn(Dist.CLIENT)

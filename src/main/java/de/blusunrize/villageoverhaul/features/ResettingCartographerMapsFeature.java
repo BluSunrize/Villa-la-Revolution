@@ -25,9 +25,20 @@ import java.util.stream.Stream;
  */
 public class ResettingCartographerMapsFeature implements IFeature
 {
+	// Config Values
+	public static boolean ENABLED = true;
+
+	@Override
+	public boolean hasEventHandling()
+	{
+		return true;
+	}
+
 	@SubscribeEvent
 	public void onVillagerTrade(TradeWithVillagerEvent event)
 	{
+		if(!ResettingCartographerMapsFeature.ENABLED)
+			return;
 		// Only affect cartographers
 		if(!(event.getAbstractVillager() instanceof Villager villager)||villager.getVillagerData().getProfession()!=VillagerProfession.CARTOGRAPHER)
 			return;

@@ -9,13 +9,13 @@ import de.blusunrize.villageoverhaul.features.ResettingCartographerMapsFeature;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.function.Supplier;
 
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(VillageOverhaul.MODID)
 public class VillageOverhaul
 {
@@ -30,6 +30,9 @@ public class VillageOverhaul
 
 	public VillageOverhaul(IEventBus modEventBus, ModContainer modContainer)
 	{
+		// Register config
+		modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
 		// Set up deferred registries
 		Registrar.MENU_REGISTER.register(modEventBus);
 

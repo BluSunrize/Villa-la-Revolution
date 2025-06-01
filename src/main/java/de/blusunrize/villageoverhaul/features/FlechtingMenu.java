@@ -123,7 +123,7 @@ public class FlechtingMenu extends AbstractContainerMenu
 
 		if(!tip.isEmpty()&&!stick.isEmpty()&&!fletching.isEmpty())
 		{
-			ItemStack tempOutput = new ItemStack(Items.ARROW, FletchingFeature.ARROW_OUTPUT_COUNT);
+			ItemStack tempOutput = new ItemStack(Items.ARROW, FletchingFeature.ARROW_OUTPUT_COUNT.getAsInt());
 			if(additional.isEmpty())
 				setupResultSlot(tempOutput, currentOutput);
 			else

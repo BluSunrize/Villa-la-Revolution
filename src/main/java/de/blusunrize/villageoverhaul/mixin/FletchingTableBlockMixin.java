@@ -1,6 +1,8 @@
 package de.blusunrize.villageoverhaul.mixin;
 
+import de.blusunrize.villageoverhaul.Config;
 import de.blusunrize.villageoverhaul.features.FlechtingMenu;
+import de.blusunrize.villageoverhaul.features.FletchingFeature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -23,23 +25,22 @@ public class FletchingTableBlockMixin extends CraftingTableBlock
 {
 	private static final Component CONTAINER_TITLE = Component.translatable("villageoverhaul.fletching");
 
-
 	public FletchingTableBlockMixin(Properties properties)
 	{
 		super(properties);
 	}
 
-
 	@Inject(method = "useWithoutItem(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/InteractionResult;", at = @At("HEAD"), cancellable = true)
 	protected void useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult blockHitResult, CallbackInfoReturnable<InteractionResult> callback)
 	{
-		if(level.isClientSide)
-			callback.setReturnValue(InteractionResult.SUCCESS);
-		else
-		{
-			player.openMenu(this.getMenuProvider(state, level, pos));
-			callback.setReturnValue(InteractionResult.CONSUME);
-		}
+		if(FletchingFeature.ENABLED)
+			if(level.isClientSide)
+				callback.setReturnValue(InteractionResult.SUCCESS);
+			else
+			{
+				player.openMenu(this.getMenuProvider(state, level, pos));
+				callback.setReturnValue(InteractionResult.CONSUME);
+			}
 	}
 
 	@Override

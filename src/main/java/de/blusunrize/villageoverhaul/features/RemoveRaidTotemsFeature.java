@@ -8,13 +8,24 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 
 /**
- * Make Evokers not draw a totem if they are part of a raid
+ * Make Evokers not drop a totem if they are part of a raid
  */
 public class RemoveRaidTotemsFeature implements IFeature
 {
+	// Config Values
+	public static boolean ENABLED = true;
+
+	@Override
+	public boolean hasEventHandling()
+	{
+		return true;
+	}
+
 	@SubscribeEvent
 	public void onMobDrops(LivingDropsEvent event)
 	{
+		if(!RemoveRaidTotemsFeature.ENABLED)
+			return;
 		if(!(event.getEntity() instanceof Evoker evoker))
 			return;
 		if(!(evoker.level() instanceof ServerLevel serverLevel))
