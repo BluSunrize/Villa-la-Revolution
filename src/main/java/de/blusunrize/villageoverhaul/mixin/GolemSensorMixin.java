@@ -1,5 +1,6 @@
 package de.blusunrize.villageoverhaul.mixin;
 
+import de.blusunrize.villageoverhaul.features.ReducedGolemSpawnFeature;
 import net.minecraft.world.entity.ai.sensing.GolemSensor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,6 +15,8 @@ public class GolemSensorMixin
 	@ModifyArg(method = "golemDetected", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/Brain;setMemoryWithExpiry(Lnet/minecraft/world/entity/ai/memory/MemoryModuleType;Ljava/lang/Object;J)V"), index = 2)
 	private static long modifyTime(long timeToLive)
 	{
-		return 5999;
+		if(ReducedGolemSpawnFeature.ENABLED)
+			return 5999;
+		return timeToLive;
 	}
 }

@@ -1,8 +1,6 @@
 package de.blusunrize.villageoverhaul;
 
-import de.blusunrize.villageoverhaul.features.FletchingFeature;
-import de.blusunrize.villageoverhaul.features.RemoveRaidTotemsFeature;
-import de.blusunrize.villageoverhaul.features.ResettingCartographerMapsFeature;
+import de.blusunrize.villageoverhaul.features.*;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
@@ -31,6 +29,16 @@ public class Config
 			.comment("Reset the maps of the cartographer when purchased, so each of them points to a different structure.")
 			.define("enabled", true);
 
+	private static final ModConfigSpec.BooleanValue GOLEMS_ENABLED = BUILDER
+			.pop().push("Reduce Iron Golem Spawns")
+			.comment("Change the time a villager remembers seeing a golem from 30 seconds to 5 minutes, slowing down their respawn rate.")
+			.define("enabled", true);
+
+	private static final ModConfigSpec.BooleanValue GOSSIP_ENABLED = BUILDER
+			.pop().push("Trades require Gossip")
+			.comment("Trades of villagers will not reset if they have not gossiped with another villager in 5 minutes. This effectively disables villager trade-halls which trap them in 1x1 boxes.")
+			.define("enabled", true);
+
 	public static final ModConfigSpec SPEC = BUILDER.build();
 
 	@SubscribeEvent
@@ -40,5 +48,7 @@ public class Config
 		FletchingFeature.ARROW_OUTPUT_COUNT = FLETCHING_COUNT;
 		RemoveRaidTotemsFeature.ENABLED = TOTEMS_ENABLED.get();
 		ResettingCartographerMapsFeature.ENABLED = CARTOGRAPHER_ENABLED.get();
+		ReducedGolemSpawnFeature.ENABLED = GOLEMS_ENABLED.get();
+		TradesRequireGossipFeature.ENABLED = GOSSIP_ENABLED.get();
 	}
 }

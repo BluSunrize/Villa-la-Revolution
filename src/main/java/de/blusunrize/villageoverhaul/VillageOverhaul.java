@@ -2,10 +2,7 @@ package de.blusunrize.villageoverhaul;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.logging.LogUtils;
-import de.blusunrize.villageoverhaul.features.FletchingFeature;
-import de.blusunrize.villageoverhaul.features.IFeature;
-import de.blusunrize.villageoverhaul.features.RemoveRaidTotemsFeature;
-import de.blusunrize.villageoverhaul.features.ResettingCartographerMapsFeature;
+import de.blusunrize.villageoverhaul.features.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -23,9 +20,11 @@ public class VillageOverhaul
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	private static final List<Supplier<IFeature>> FEATURES = ImmutableList.of(
+			FletchingFeature::new,
 			RemoveRaidTotemsFeature::new,
 			ResettingCartographerMapsFeature::new,
-			FletchingFeature::new
+			ReducedGolemSpawnFeature::new,
+			TradesRequireGossipFeature::new
 	);
 
 	public VillageOverhaul(IEventBus modEventBus, ModContainer modContainer)
