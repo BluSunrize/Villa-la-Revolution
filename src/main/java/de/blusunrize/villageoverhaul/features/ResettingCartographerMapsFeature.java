@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 /**
  * Make any cartographer trades for structure maps reset themselves to a different structure after purchasing
  */
-public class ResettingCartographerMaps
+public class ResettingCartographerMapsFeature implements IFeature
 {
 	@SubscribeEvent
 	public void onVillagerTrade(TradeWithVillagerEvent event)

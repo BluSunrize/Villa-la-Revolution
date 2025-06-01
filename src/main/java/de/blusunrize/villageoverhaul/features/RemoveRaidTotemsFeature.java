@@ -10,7 +10,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 /**
  * Make Evokers not draw a totem if they are part of a raid
  */
-public class RemoveRaidTotems
+public class RemoveRaidTotemsFeature implements IFeature
 {
 	@SubscribeEvent
 	public void onMobDrops(LivingDropsEvent event)
