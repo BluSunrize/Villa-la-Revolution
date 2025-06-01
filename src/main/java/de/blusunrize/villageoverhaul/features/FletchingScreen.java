@@ -14,6 +14,13 @@ public class FletchingScreen extends AbstractContainerScreen<FlechtingMenu>
 {
 	private static final ResourceLocation BG_LOCATION = ResourceLocation.fromNamespaceAndPath(VillageOverhaul.MODID, "textures/gui/fletching_table.png");
 
+	private static final Component[] SLOT_TOOLTIPS = {
+			Component.translatable("villageoverhaul.fletching.slot.head"),
+			Component.translatable("villageoverhaul.fletching.slot.shaft"),
+			Component.translatable("villageoverhaul.fletching.slot.fletching"),
+			Component.translatable("villageoverhaul.fletching.slot.additional")
+	};
+
 	public FletchingScreen(FlechtingMenu menu, Inventory playerInventory, Component title)
 	{
 		super(menu, playerInventory, title);
@@ -25,6 +32,12 @@ public class FletchingScreen extends AbstractContainerScreen<FlechtingMenu>
 	{
 		super.render(guiGraphics, mouseX, mouseY, partialTick);
 		this.renderTooltip(guiGraphics, mouseX, mouseY);
+		this.renderTooltip(guiGraphics, mouseX, mouseY);
+		if(this.hoveredSlot!=null
+				&&this.hoveredSlot.index < SLOT_TOOLTIPS.length
+				&&!this.hoveredSlot.hasItem()
+				&&this.menu.getCarried().isEmpty())
+			guiGraphics.renderTooltip(this.font, SLOT_TOOLTIPS[this.hoveredSlot.index], mouseX, mouseY);
 	}
 
 	@Override

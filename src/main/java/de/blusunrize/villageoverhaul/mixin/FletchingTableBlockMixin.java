@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(FletchingTableBlock.class)
 public class FletchingTableBlockMixin extends CraftingTableBlock
 {
-	private static final Component CONTAINER_TITLE = Component.translatable("container.fletching");
+	private static final Component CONTAINER_TITLE = Component.translatable("villageoverhaul.fletching");
 
 
 	public FletchingTableBlockMixin(Properties properties)
