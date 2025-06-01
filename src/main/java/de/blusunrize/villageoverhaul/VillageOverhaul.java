@@ -39,7 +39,8 @@ public class VillageOverhaul
 			// Run initialization
 			instance.init(modEventBus);
 			// Register for event handling
-			NeoForge.EVENT_BUS.register(instance);
+			if(instance.hasEventHandling())
+				NeoForge.EVENT_BUS.register(instance);
 		});
 	}
 }

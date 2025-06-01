@@ -6,4 +6,8 @@ public interface IFeature
 {
 	default void init(IEventBus modEventBus) {}
 
+	default boolean hasEventHandling() {
+		return true;
+	}
+
 }

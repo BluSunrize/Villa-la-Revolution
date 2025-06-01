@@ -27,6 +27,12 @@ public class FletchingFeature implements IFeature
 		modEventBus.addListener(this::registerScreens);
 	}
 
+	@Override
+	public boolean hasEventHandling()
+	{
+		return false;
+	}
+
 	@OnlyIn(Dist.CLIENT)
 	private void registerScreens(RegisterMenuScreensEvent event)
 	{
