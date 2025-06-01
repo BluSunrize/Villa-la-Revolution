@@ -1,6 +1,5 @@
 package de.blusunrize.villageoverhaul.features;
 
-import de.blusunrize.villageoverhaul.Registrar;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -27,7 +26,7 @@ public class FlechtingMenu extends AbstractContainerMenu
 
 	public FlechtingMenu(int containerId, Inventory playerInventory, ContainerLevelAccess access)
 	{
-		super(Registrar.MENU_FLETCHING.get(), containerId);
+		super(FletchingFeature.MENU_FLETCHING.get(), containerId);
 		this.access = access;
 		this.container = new SimpleContainer(3)
 		{
@@ -50,7 +49,7 @@ public class FlechtingMenu extends AbstractContainerMenu
 		{
 			public boolean mayPlace(ItemStack stack)
 			{
-				return stack.is(Registrar.TAG_ARROWHEAD);
+				return stack.is(FletchingFeature.TAG_ARROWHEAD);
 			}
 		});
 		this.addSlot(new Slot(this.container, 1, 44, 33)
@@ -64,7 +63,7 @@ public class FlechtingMenu extends AbstractContainerMenu
 		{
 			public boolean mayPlace(ItemStack stack)
 			{
-				return stack.is(Registrar.TAG_FLETCHING);
+				return stack.is(FletchingFeature.TAG_FLETCHING);
 			}
 		});
 

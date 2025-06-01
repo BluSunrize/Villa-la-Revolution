@@ -1,7 +1,7 @@
 package de.blusunrize.villageoverhaul.data;
 
-import de.blusunrize.villageoverhaul.Registrar;
 import de.blusunrize.villageoverhaul.VillageOverhaul;
+import de.blusunrize.villageoverhaul.features.FletchingFeature;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -22,7 +22,7 @@ public class TagProviderItems extends ItemTagsProvider
 	@Override
 	protected void addTags(Provider provider)
 	{
-		tag(Registrar.TAG_FLETCHING).addTag(Tags.Items.FEATHERS);
-		tag(Registrar.TAG_ARROWHEAD).add(Items.FLINT).addTag(Tags.Items.NUGGETS_IRON);
+		tag(FletchingFeature.TAG_FLETCHING).addTag(Tags.Items.FEATHERS);
+		tag(FletchingFeature.TAG_ARROWHEAD).add(Items.FLINT).addTag(Tags.Items.NUGGETS_IRON);
 	}
 }
