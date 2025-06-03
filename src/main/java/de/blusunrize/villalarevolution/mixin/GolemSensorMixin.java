@@ -1,6 +1,6 @@
-package de.blusunrize.villageoverhaul.mixin;
+package de.blusunrize.villalarevolution.mixin;
 
-import de.blusunrize.villageoverhaul.features.ReducedGolemSpawnFeature;
+import de.blusunrize.villalarevolution.features.ReducedGolemSpawnFeature;
 import net.minecraft.world.entity.ai.sensing.GolemSensor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

@@ -1,0 +1,9 @@
+{
+  "villalarevolution.fletching": "Fletching",
+  "villalarevolution.fletching.slot.head": "Arrowhead Material",
+  "villalarevolution.fletching.slot.shaft": "Shaft Material",
+  "villalarevolution.fletching.slot.fletching": "Fletching Material",
+  "villalarevolution.fletching.slot.additional": "Additional Component",
+  "tag.item.villalarevolution.arrowhead": "Arrowhead Material",
+  "tag.item.villalarevolution.fletching": "Fletching Material"
+}

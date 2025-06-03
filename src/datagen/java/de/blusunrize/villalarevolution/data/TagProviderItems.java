@@ -1,7 +1,7 @@
-package de.blusunrize.villageoverhaul.data;
+package de.blusunrize.villalarevolution.data;
 
-import de.blusunrize.villageoverhaul.VillageOverhaul;
-import de.blusunrize.villageoverhaul.features.FletchingFeature;
+import de.blusunrize.villalarevolution.VillaLaRevolution;
+import de.blusunrize.villalarevolution.features.FletchingFeature;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -16,7 +16,7 @@ public class TagProviderItems extends ItemTagsProvider
 {
 	public TagProviderItems(PackOutput output, CompletableFuture<Provider> lookupProvider, ExistingFileHelper existingFileHelper)
 	{
-		super(output, lookupProvider, CompletableFuture.completedFuture(TagsProvider.TagLookup.empty()), VillageOverhaul.MODID, existingFileHelper);
+		super(output, lookupProvider, CompletableFuture.completedFuture(TagsProvider.TagLookup.empty()), VillaLaRevolution.MODID, existingFileHelper);
 	}
 
 	@Override

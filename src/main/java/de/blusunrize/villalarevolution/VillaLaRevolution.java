@@ -1,8 +1,8 @@
-package de.blusunrize.villageoverhaul;
+package de.blusunrize.villalarevolution;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.logging.LogUtils;
-import de.blusunrize.villageoverhaul.features.*;
+import de.blusunrize.villalarevolution.features.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -13,10 +13,10 @@ import org.slf4j.Logger;
 import java.util.List;
 import java.util.function.Supplier;
 
-@Mod(VillageOverhaul.MODID)
-public class VillageOverhaul
+@Mod(VillaLaRevolution.MODID)
+public class VillaLaRevolution
 {
-	public static final String MODID = "villageoverhaul";
+	public static final String MODID = "villalarevolution";
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	private static final List<Supplier<IFeature>> FEATURES = ImmutableList.of(
@@ -27,7 +27,7 @@ public class VillageOverhaul
 			TradesRequireGossipFeature::new
 	);
 
-	public VillageOverhaul(IEventBus modEventBus, ModContainer modContainer)
+	public VillaLaRevolution(IEventBus modEventBus, ModContainer modContainer)
 	{
 		// Register config
 		modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

@@ -1,7 +1,7 @@
-package de.blusunrize.villageoverhaul.data;
+package de.blusunrize.villalarevolution.data;
 
 import com.google.common.collect.ImmutableList;
-import de.blusunrize.villageoverhaul.VillageOverhaul;
+import de.blusunrize.villalarevolution.VillaLaRevolution;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.HolderSet;
@@ -25,12 +25,12 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys;
 
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = VillageOverhaul.MODID)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = VillaLaRevolution.MODID)
 public class DatagenHolder
 {
 	public static final ResourceKey<StructureModifier> WOODLAND_MANSION = ResourceKey.create(
 			Keys.STRUCTURE_MODIFIERS,
-			ResourceLocation.fromNamespaceAndPath(VillageOverhaul.MODID, "woodland_mansion_illagers")
+			ResourceLocation.fromNamespaceAndPath(VillaLaRevolution.MODID, "woodland_mansion_illagers")
 	);
 
 	@SubscribeEvent

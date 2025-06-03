@@ -1,7 +1,7 @@
-package de.blusunrize.villageoverhaul.features;
+package de.blusunrize.villalarevolution.features;
 
 /**
- * @see de.blusunrize.villageoverhaul.mixin.VillagerMixin
+ * @see de.blusunrize.villalarevolution.mixin.VillagerMixin
  */
 public class TradesRequireGossipFeature implements IFeature
 {

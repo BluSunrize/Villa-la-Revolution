@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "de.blusunrize.villageoverhaul.mixin",
+  "package": "de.blusunrize.villalarevolution.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "FletchingTableBlockMixin",

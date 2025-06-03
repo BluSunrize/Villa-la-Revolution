@@ -1,6 +1,6 @@
-package de.blusunrize.villageoverhaul.features;
+package de.blusunrize.villalarevolution.features;
 
-import de.blusunrize.villageoverhaul.VillageOverhaul;
+import de.blusunrize.villalarevolution.VillaLaRevolution;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
@@ -67,7 +67,7 @@ public class ResettingCartographerMapsFeature implements IFeature
 					MerchantOffer newOffer = listing.getOffer(villager, villager.getRandom());
 					int offerIndex = villager.getOffers().indexOf(event.getMerchantOffer());
 					villager.getOffers().set(offerIndex, newOffer);
-					VillageOverhaul.LOGGER.debug("Replaced cartographer trade {} with new trade.", offerIndex);
+					VillaLaRevolution.LOGGER.debug("Replaced cartographer trade {} with new trade.", offerIndex);
 				});
 	}
 }

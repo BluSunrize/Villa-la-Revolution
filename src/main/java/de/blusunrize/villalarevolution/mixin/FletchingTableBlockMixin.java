@@ -1,7 +1,7 @@
-package de.blusunrize.villageoverhaul.mixin;
+package de.blusunrize.villalarevolution.mixin;
 
-import de.blusunrize.villageoverhaul.gui.FlechtingMenu;
-import de.blusunrize.villageoverhaul.features.FletchingFeature;
+import de.blusunrize.villalarevolution.gui.FlechtingMenu;
+import de.blusunrize.villalarevolution.features.FletchingFeature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class FletchingTableBlockMixin extends CraftingTableBlock
 {
 	@Unique
-	private static final Component CONTAINER_TITLE = Component.translatable("villageoverhaul.fletching");
+	private static final Component CONTAINER_TITLE = Component.translatable("villalarevolution.fletching");
 
 	public FletchingTableBlockMixin(Properties properties)
 	{

@@ -1,4 +1,4 @@
-package de.blusunrize.villageoverhaul.features;
+package de.blusunrize.villalarevolution.features;
 
 import net.neoforged.bus.api.IEventBus;
 

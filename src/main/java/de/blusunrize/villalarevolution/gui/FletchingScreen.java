@@ -1,6 +1,6 @@
-package de.blusunrize.villageoverhaul.gui;
+package de.blusunrize.villalarevolution.gui;
 
-import de.blusunrize.villageoverhaul.VillageOverhaul;
+import de.blusunrize.villalarevolution.VillaLaRevolution;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -12,13 +12,13 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class FletchingScreen extends AbstractContainerScreen<FlechtingMenu>
 {
-	private static final ResourceLocation BG_LOCATION = ResourceLocation.fromNamespaceAndPath(VillageOverhaul.MODID, "textures/gui/fletching_table.png");
+	private static final ResourceLocation BG_LOCATION = ResourceLocation.fromNamespaceAndPath(VillaLaRevolution.MODID, "textures/gui/fletching_table.png");
 
 	private static final Component[] SLOT_TOOLTIPS = {
-			Component.translatable("villageoverhaul.fletching.slot.head"),
-			Component.translatable("villageoverhaul.fletching.slot.shaft"),
-			Component.translatable("villageoverhaul.fletching.slot.fletching"),
-			Component.translatable("villageoverhaul.fletching.slot.additional")
+			Component.translatable("villalarevolution.fletching.slot.head"),
+			Component.translatable("villalarevolution.fletching.slot.shaft"),
+			Component.translatable("villalarevolution.fletching.slot.fletching"),
+			Component.translatable("villalarevolution.fletching.slot.additional")
 	};
 
 	public FletchingScreen(FlechtingMenu menu, Inventory playerInventory, Component title)

@@ -1,7 +1,7 @@
-package de.blusunrize.villageoverhaul.features;
+package de.blusunrize.villalarevolution.features;
 
 /**
- * @see de.blusunrize.villageoverhaul.mixin.GolemSensorMixin
+ * @see de.blusunrize.villalarevolution.mixin.GolemSensorMixin
  */
 public class ReducedGolemSpawnFeature implements IFeature
 {

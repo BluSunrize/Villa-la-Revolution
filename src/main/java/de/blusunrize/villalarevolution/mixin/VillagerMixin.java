@@ -1,7 +1,7 @@
-package de.blusunrize.villageoverhaul.mixin;
+package de.blusunrize.villalarevolution.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import de.blusunrize.villageoverhaul.features.TradesRequireGossipFeature;
+import de.blusunrize.villalarevolution.features.TradesRequireGossipFeature;
 import net.minecraft.world.entity.npc.Villager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

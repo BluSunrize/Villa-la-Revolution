@@ -1,4 +1,4 @@
-package de.blusunrize.villageoverhaul.features;
+package de.blusunrize.villalarevolution.features;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.monster.Evoker;

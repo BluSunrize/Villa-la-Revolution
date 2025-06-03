@@ -1,9 +1,9 @@
-package de.blusunrize.villageoverhaul.features;
+package de.blusunrize.villalarevolution.features;
 
 import com.google.common.collect.ImmutableMap;
-import de.blusunrize.villageoverhaul.Registrar;
-import de.blusunrize.villageoverhaul.gui.FlechtingMenu;
-import de.blusunrize.villageoverhaul.gui.FletchingScreen;
+import de.blusunrize.villalarevolution.Registrar;
+import de.blusunrize.villalarevolution.gui.FlechtingMenu;
+import de.blusunrize.villalarevolution.gui.FletchingScreen;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.flag.FeatureFlags;
